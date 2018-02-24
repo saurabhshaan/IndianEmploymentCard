@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/areyou"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+    <RadioGroup
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/radiobtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RadioButton
+        android:id="@+id/invidual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/indi"
+        android:onClick="ClickMe"/>
+    <RadioButton
+        android:id="@+id/education"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/edu"
+        android:onClick="ClickMe"/>
+    <RadioButton
+        android:id="@+id/corporate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cor"
+        android:onClick="ClickMe"/>
+    </RadioGroup>
+
+</LinearLayout>

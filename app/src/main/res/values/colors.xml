@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--dots active color-->
+    <color name="slide1">#eead0e</color>
+    <color name="slide2">#104e8b</color>
+    <color name="slide3">#c9c9c9</color>
+
+    <!-- dots inactive color-->
+    <color name="inslide1">#cd950c</color>
+    <color name="inslide2">#69a3dc</color>
+    <color name="inslide3">#878787</color>
+
+    <array name="array_dot_active">
+        <item>@color/slide1</item>
+        <item>@color/slide2</item>
+        <item>@color/slide3</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/inslide1</item>
+        <item>@color/inslide2</item>
+        <item>@color/inslide3</item>
+    </array>
+</resources>
