@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,34 +44,21 @@ public class LogOn extends AppCompatActivity{
             dialog.show();
 
         }else {
-
-        }
-    }
-    public void GetInMethode(){
-        //validation
-        if (emailoriec.getText().toString().length() == 0){
-            emailoriec.setError("Required field");
-            return;
-        }if (mpassword.getText().toString().length() == 0){
-            mpassword.setError("Required field");
-        }else {
-            Toast.makeText(this, "Fields Validated", Toast.LENGTH_SHORT).show();
-        }
-        //validation end here
-        emailice = emailoriec.getText().toString().trim();
-        pass = mpassword.getText().toString().trim();
-        Log.d("TAG","Fields"+emailice+""+pass);
-        if (isOnline()){
-            String method= "GetIn";
-            Log.d("TAG","Connection OK");
-            Log.d("TAG","bg start");
-
-            LogOnBackGroundTask logOnBackGroundTask = new LogOnBackGroundTask(LogOn.this);
-            logOnBackGroundTask.execute(method,emailice,pass);
-
-            Log.d("TAG","bg end");
-        }else {
-            Toast.makeText(this, "Check your Connection and try again", Toast.LENGTH_SHORT).show();
+            //validation
+            if (emailoriec.getText().toString().length() == 0){
+                emailoriec.setError("Required field");
+                return;
+            }if (mpassword.getText().toString().length() == 0){
+                mpassword.setError("Required field");
+            }else {
+                Toast.makeText(this, "Fields Validated", Toast.LENGTH_SHORT).show();
+            }
+            //validation end here
+            emailice = emailoriec.getText().toString().trim();
+            pass = mpassword.getText().toString().trim();
+            if (isOnline()) {
+                new LoginFetch().execute(emailice, pass);
+            }
         }
     }
     private void launchHomeScreen(){
@@ -78,6 +66,7 @@ public class LogOn extends AppCompatActivity{
         startActivity(new Intent(LogOn.this,MainActivity.class));
         finish();
     }
+
     public boolean isOnline(){
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
@@ -98,6 +87,24 @@ public class LogOn extends AppCompatActivity{
                 if (checked)
                     startActivity(new Intent(LogOn.this, CorporateSignUp.class));
                     break;
+        }
+    }
+
+    class LoginFetch extends AsyncTask<String,Void,String>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
         }
     }
 }
