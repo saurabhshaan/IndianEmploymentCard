@@ -13,6 +13,8 @@
     <color name="inslide1">#cd950c</color>
     <color name="inslide2">#69a3dc</color>
     <color name="inslide3">#878787</color>
+    <color name="black">#000</color>
+    <color name="white">#fff</color>
 
     <array name="array_dot_active">
         <item>@color/slide1</item>

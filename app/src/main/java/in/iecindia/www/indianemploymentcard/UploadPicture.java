@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,14 +19,26 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 
 public class UploadPicture extends AppCompatActivity {
     private ImageView imageView;
     private Button button;
+    private EditText pass,cnfrmpass;
+    private String password,Confrmpassword;
     String encodedImage, imgDecodableString;
     final int RESULT_LOAD_IMG = 1;
     private String hscholl,hrollnumber,imedite,irollnumber,gcourse,gstatus,guniversity,grollnumber;
@@ -37,6 +50,8 @@ public class UploadPicture extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_picture);
 
+        pass = findViewById(R.id.password);
+        cnfrmpass = findViewById(R.id.cnfrmpassword);
         imageView = findViewById(R.id.imageView4);
 
     }
@@ -148,6 +163,16 @@ public class UploadPicture extends AppCompatActivity {
     }
 
     public void FinalSubmit(View view){
+//        password varification
+        if (pass.getText().toString().length()==0){
+            pass.setError("Fill Password");
+            return;
+        }if (cnfrmpass.getText().toString().length()==0){
+            cnfrmpass.setError("Conform your password");
+            return;
+        }else{
+            Toast.makeText(this, "Password OK", Toast.LENGTH_SHORT).show();
+        }
 
         firstName = getIntent().getStringExtra("FirstName");
         lastName = getIntent().getStringExtra("LastName");
@@ -170,8 +195,12 @@ public class UploadPicture extends AppCompatActivity {
         guniversity = getIntent().getStringExtra("Guniversity");
         grollnumber = getIntent().getStringExtra("Grollnumber");
 
+        password = pass.getText().toString().trim();
+        Confrmpassword = cnfrmpass.getText().toString().trim();
+
         Log.d("ASD",firstName+""+lastName+""+middleName+""+Email+""+AdharNumber+""+Addline1+""+
-                Addline2+""+Addline3+""+AddPincode+""+AddState+""+AddCountry+""+hscholl+""+hrollnumber+""+imedite+""+irollnumber+""+gcourse+""+gstatus+""+guniversity+""+grollnumber);
+                Addline2+""+Addline3+""+AddPincode+""+AddState+""+AddCountry+""+hscholl+""+hrollnumber+""+
+                imedite+""+irollnumber+""+gcourse+""+gstatus+""+guniversity+""+grollnumber+""+password+""+Confrmpassword);
 
 
 
@@ -181,8 +210,8 @@ public class UploadPicture extends AppCompatActivity {
             SignUpBackground signUpBackground = new SignUpBackground(UploadPicture.this);
             signUpBackground.execute(method,firstName,lastName,middleName,Email,AdharNumber,Addline1,Addline2,Addline3,
                     AddPincode,AddState,AddCountry,hscholl,hrollnumber,imedite,irollnumber,gcourse,gstatus,guniversity,
-                    grollnumber,grollnumber, encodedImage);
-
+                    grollnumber,grollnumber, encodedImage,password,Confrmpassword);
+                    return;
         }else {
             Toast.makeText(this, "Connection is Offline ", Toast.LENGTH_SHORT).show();
         }
@@ -191,5 +220,113 @@ public class UploadPicture extends AppCompatActivity {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
         return info != null && info.isConnectedOrConnecting();
+    }
+    public class SignUpBackground extends AsyncTask<String,Void,String> {
+        Context ctx;
+
+        public SignUpBackground(Context ctx1){
+            this.ctx = ctx1;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String reg_url = "http://172.28.172.2/IndianEmploymentCard/IndividualSignUp.php";
+            Log.d("TAG", "attempt to register");
+
+            String method = params[0];
+            if (method.equals("SENDDATA")) {
+                String firstname = params[1];
+                String lastname = params[2];
+                String middleName = params[3];
+                String Email = params[4];
+                String AdharNumber = params[5];
+                String Addline1 = params[6];
+                String Addline2 = params[7];
+                String Addline3 = params[8];
+                String AddPincode = params[9];
+                String AddState = params[10];
+                String AddCountry = params[11];
+                String hscholl = params[12];
+                String hrollnumber = params[13];
+                String imedite = params[14];
+                String irollnumber = params[15];
+                String gcourse = params[16];
+                String gstatus = params[17];
+                String guniversity = params[18];
+                String grollnumber = params[19];
+                String encodedImage = params[20];
+                String password1 = params[21];
+                String cnfrmpassword2 = params[22];
+
+                Log.d("SIT", firstname + "" + lastname+""+middleName+""+Email+""+AdharNumber+""+Addline1+""+Addline2+""
+                        +Addline3+""+AddPincode+""+AddState+""+AddCountry+""+hscholl+""+hrollnumber+""+imedite+""+irollnumber+""
+                        +gcourse+""+gstatus+""+guniversity+""+grollnumber+""+encodedImage+""+password1+""+cnfrmpassword2);
+                try {
+                    URL url = new URL(reg_url);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
+                    Log.d("TAG", "open url connection");
+                    OutputStream os = httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                    Log.d("TAG", "buffered writer");
+                    // encode data
+
+
+                    String OpenConn = URLEncoder.encode("First_Name", "UTF-8") + "=" + URLEncoder.encode(firstname, "UTF-8") + "&" +
+                            URLEncoder.encode("Last_Name", "UTF-8") + "=" + URLEncoder.encode(lastname, "UTF-8") + "&" +
+                            URLEncoder.encode("Middle_Name", "UTF-8") + "=" + URLEncoder.encode(middleName, "UTF-8") + "&" +
+                            URLEncoder.encode("Email", "UTF-8") + "=" + URLEncoder.encode(Email, "UTF-8") + "&" +
+                            URLEncoder.encode("Adhar_Number", "UTF-8") + "=" + URLEncoder.encode(AdharNumber, "UTF-8") + "&" +
+                            URLEncoder.encode("Add_line1", "UTF-8") + "=" + URLEncoder.encode(Addline1, "UTF-8") + "&" +
+                            URLEncoder.encode("Add_line2", "UTF-8") + "=" + URLEncoder.encode(Addline2, "UTF-8") + "&" +
+                            URLEncoder.encode("Add_line3", "UTF-8") + "=" + URLEncoder.encode(Addline3, "UTF-8") + "&" +
+                            URLEncoder.encode("Pincode", "UTF-8") + "=" + URLEncoder.encode(AddPincode, "UTF-8") + "&" +
+                            URLEncoder.encode("State", "UTF-8") + "=" + URLEncoder.encode(AddState, "UTF-8") + "&" +
+                            URLEncoder.encode("Country", "UTF-8") + "=" + URLEncoder.encode(AddCountry, "UTF-8") + "&" +
+                            URLEncoder.encode("Highschool_Board", "UTF-8") + "=" + URLEncoder.encode(hscholl, "UTF-8") + "&" +
+                            URLEncoder.encode("Highschool_Roll_Number", "UTF-8") + "=" + URLEncoder.encode(hrollnumber, "UTF-8") + "&" +
+                            URLEncoder.encode("Intermediate_Board", "UTF-8") + "=" + URLEncoder.encode(imedite, "UTF-8") + "&" +
+                            URLEncoder.encode("Intermediate_Roll_Number", "UTF-8") + "=" + URLEncoder.encode(irollnumber, "UTF-8") + "&" +
+                            URLEncoder.encode("Graduation_Course", "UTF-8") + "=" + URLEncoder.encode(gcourse, "UTF-8") + "&" +
+                            URLEncoder.encode("Graduation_Status", "UTF-8") + "=" + URLEncoder.encode(gstatus, "UTF-8") + "&" +
+                            URLEncoder.encode("Graduation_University", "UTF-8") + "=" + URLEncoder.encode(guniversity, "UTF-8")+ "&" +
+                            URLEncoder.encode("Graduation_Roll_Number", "UTF-8") + "=" + URLEncoder.encode(grollnumber, "UTF-8")+ "&" +
+                            URLEncoder.encode("Person_Image", "UTF-8") + "=" + URLEncoder.encode(encodedImage, "UTF-8")+"&"+
+                            URLEncoder.encode("Password","UTF-8")+"="+URLEncoder.encode(password1,"UTF-8")+"&"+
+                            URLEncoder.encode("Confrm_pass","UTF-8")+"="+URLEncoder.encode(cnfrmpassword2,"UTF-8");
+                    Log.d("TAG", "data parameter set");
+                    bufferedWriter.write(OpenConn);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    Log.d("TAG", "buffer writer close");
+                    os.close();
+                    // get Reponce from server
+                    InputStream is = httpURLConnection.getInputStream();
+                    Log.d("TAG", "debug");
+                    is.close();
+                    return "Login";
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Toast.makeText(ctx, "Registered", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -59,4 +59,7 @@
     <string name="university_email">University Email</string>
     <string name="please_wait_until_we_send_your_password_on_your_registered_mail">Please wait until we send your password on your registered mail</string>
     <string name="thank_you">Thank You</string>
+    <string name="pass1">Password</string>
+    <string name="conform_password">Conform password</string>
+    <string name="choose_password">Choose password</string>
 </resources>
