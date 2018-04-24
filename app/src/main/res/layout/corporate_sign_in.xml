@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="in.iecindia.www.indianemploymentcard.LogOn">
+    tools:context="in.iecindia.www.indianemploymentcard.CorporateSignIn">
 
     <TextView
         android:id="@+id/well"
@@ -24,8 +24,8 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/EmailorIEC"
-            android:hint="@string/iec"/>
+            android:id="@+id/CompanyEmail"
+            android:hint="@string/email"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -35,8 +35,7 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:id="@+id/password"
+            android:id="@+id/Companypassword"
             android:hint="@string/password"/>
     </android.support.design.widget.TextInputLayout>
     <Button
@@ -44,35 +43,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/pas"
-        android:text="@string/letsgo"
+        android:text="@string/login"
         style="?android:attr/buttonBarButtonStyle"
         android:textAllCaps="false"
-        android:onClick="letsgo"/>
+        android:onClick="Login"/>
 
-    <TextView
-        android:id="@+id/corporate_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/letsgo"
-        android:fontFamily="cursive"
-        android:text="@string/corporate_login"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/colorAccent"
-        android:textColorLink="@color/colorAccent"
-        android:textSize="10sp"
-        android:onClick="COR_LOGIN"/>
-
-    <TextView
-        android:id="@+id/university_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/corporate_login"
-        android:fontFamily="cursive"
-        android:text="@string/university_login"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/colorAccent"
-        android:textSize="10sp"
-        android:onClick="UNI_LOGIN"/>
 </RelativeLayout>

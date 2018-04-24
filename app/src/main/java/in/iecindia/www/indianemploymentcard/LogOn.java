@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,7 +44,7 @@ public class LogOn extends AppCompatActivity{
 
         logOnPrefManager = new LogOnPrefManager(this);
         if (!logOnPrefManager.IsLogOnFirstTimeLaunch()){
-
+//        launchHomeScreen();
         }
     }
     public void letsgo(View view){
@@ -72,14 +71,17 @@ public class LogOn extends AppCompatActivity{
             pass = mpassword.getText().toString().trim();
             if (isOnline()) {
                 new LoginFetch().execute(emailice, pass);
+            }else{
+                Toast.makeText(this, "You are offline", Toast.LENGTH_SHORT).show();
             }
         }
     }
-    private void launchHomeScreen(){
+
+  /*  private void launchHomeScreen(){
         logOnPrefManager.setFirstLaunch(false);
         startActivity(new Intent(LogOn.this,MainActivity.class));
         finish();
-    }
+    }*/
 
     public boolean isOnline(){
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -104,6 +106,14 @@ public class LogOn extends AppCompatActivity{
         }
     }
 
+    public void COR_LOGIN(View view) {
+        startActivity(new Intent(this,CorporateSignIn.class));
+    }
+
+    public void UNI_LOGIN(View view) {
+        startActivity(new Intent(this,CorporateSignIn.class));
+    }
+
     class LoginFetch extends AsyncTask<String,Void,String>{
         HttpURLConnection conn;
         URL url;
@@ -115,7 +125,7 @@ public class LogOn extends AppCompatActivity{
 
         @Override
         protected String doInBackground(String... strings) {
-            String url1 = "";
+            String url1 = "http://172.28.172.2:8080/iec_login.php";
             String EmailorIEC = strings[0];
             String IEC_Passwprd = strings[1];
             try{
@@ -159,12 +169,20 @@ public class LogOn extends AppCompatActivity{
             } catch (IOException e){
                 e.printStackTrace();
             }
-            return null;
+            return "Login Success...Welcome";
         }
 
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+        protected void onPostExecute(String result) {
+            Toast.makeText(LogOn.this, "res"+result, Toast.LENGTH_SHORT).show();
+
+            if (result.equals("success")){
+                startActivity(new Intent(LogOn.this,Tab_Activity.class));
+            }
+            else {
+                    Toast.makeText(LogOn.this, "Email or Password is Incorrect", Toast.LENGTH_SHORT).show();
+                    return;
+                }
         }
     }
 }

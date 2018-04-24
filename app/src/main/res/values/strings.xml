@@ -62,4 +62,7 @@
     <string name="pass1">Password</string>
     <string name="conform_password">Conform password</string>
     <string name="choose_password">Choose password</string>
+    <string name="university_login">Educational Sector Login</string>
+    <string name="corporate_login">Corporate Sector Login</string>
+    <string name="login">Login</string>
 </resources>

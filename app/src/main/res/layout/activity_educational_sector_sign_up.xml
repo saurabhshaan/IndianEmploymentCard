@@ -117,15 +117,42 @@
         android:hint="@string/vc_name" />
     </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:layout_width="250dp"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText6"
+        android:id="@+id/editText8">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/password_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/password" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText10"
+        android:layout_below="@+id/editText8">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/conform_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/conform_password" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText10"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
         android:onClick="EducationSignUp"
         android:text="@string/get_into"
-        android:background="@color/colorAccent"
-        android:textColor="#fff"/>
+        style="?android:attr/buttonBarButtonStyle"/>
 </RelativeLayout>
 </ScrollView>

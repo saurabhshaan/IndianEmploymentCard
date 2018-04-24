@@ -97,7 +97,7 @@ public class CorporateSignUp extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            String reg_url = "http://172.28.172.2/IndianEmploymentCard/CorporateSectorPeople.php";
+            String reg_url = "http://172.28.172.2:8080/CorporateSectorPeople.php";
             Log.d("TAG", "attempt to register");
 
             String method = params[0];
@@ -117,10 +117,10 @@ public class CorporateSignUp extends AppCompatActivity {
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
                     httpURLConnection.setDoOutput(true);
-                    Log.d("TAG", "open url connection");
+                    Log.d("QWE", "open url connection");
                     OutputStream os = httpURLConnection.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-                    Log.d("TAG", "buffered writer");
+                    Log.d("QWE", "buffered writer");
                     // encode data
 
 
@@ -131,17 +131,17 @@ public class CorporateSignUp extends AppCompatActivity {
                             URLEncoder.encode("NumBrnch", "UTF-8") + "=" + URLEncoder.encode(NumBrnch, "UTF-8") + "&" +
                             URLEncoder.encode("TinNum", "UTF-8") + "=" + URLEncoder.encode(TinNum, "UTF-8") + "&" +
                             URLEncoder.encode("Ceoname", "UTF-8") + "=" + URLEncoder.encode(Ceoname, "UTF-8");
-                    Log.d("TAG", "data parameter set");
+                    Log.d("QWE", "data parameter set");
                     bufferedWriter.write(OpenConn);
                     bufferedWriter.flush();
                     bufferedWriter.close();
-                    Log.d("TAG", "buffer writer close");
+                    Log.d("QWE", "buffer writer close");
                     os.close();
                     // get Reponce from server
                     InputStream is = httpURLConnection.getInputStream();
-                    Log.d("TAG", "debug");
+                    Log.d("QWE", "debug"+is);
                     is.close();
-                    return "Login";
+                    return "Registration Successfull";
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException e) {

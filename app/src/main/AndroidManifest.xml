@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -21,9 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/NoToolBar" />
+        <activity android:name=".Tab_Activity" />
         <activity
             android:name=".WelcomeScreen"
             android:theme="@style/NoToolBar" />
@@ -33,6 +32,9 @@
         <activity android:name=".UploadPicture" />
         <activity android:name=".EducationalSectorSignUp" />
         <activity android:name=".CorporateSignUp" />
+        <activity android:name=".CorporateSignIn" />
+        <!-- <activity android:name=".Tab_Activity" /> -->
+        <activity android:name=".EducationSectorSignIn"></activity>
     </application>
 
 </manifest>

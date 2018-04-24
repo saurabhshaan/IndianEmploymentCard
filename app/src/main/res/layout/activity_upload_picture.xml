@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="in.iecindia.www.indianemploymentcard.UploadPicture">
-
 
     <TextView
         android:id="@+id/text"
@@ -50,6 +52,7 @@
         android:fontFamily="casual"
         android:paddingLeft="5dp"
         android:layout_below="@+id/btnUpload"/>
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,9 +62,9 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/pass1"
-            android:inputType="textPassword"/>
+            android:hint="@string/pass1" />
     </android.support.design.widget.TextInputLayout>
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,8 +74,8 @@
             android:id="@+id/cnfrmpassword"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/conform_password"
-            android:inputType="textPassword"/>
+            android:hint="@string/conform_password"/>
+
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -88,3 +91,4 @@
         android:onClick="FinalSubmit"
         android:text="@string/final_submit" />
 </RelativeLayout>
+</ScrollView>
