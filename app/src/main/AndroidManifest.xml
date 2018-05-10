@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -34,7 +34,10 @@
         <activity android:name=".CorporateSignUp" />
         <activity android:name=".CorporateSignIn" />
         <!-- <activity android:name=".Tab_Activity" /> -->
-        <activity android:name=".EducationSectorSignIn"></activity>
+        <activity android:name=".EducationSectorSignIn" />
+        <activity android:name=".NewsDetails" />
+        <activity android:name=".CorporateVerificationActivity" />
+        <activity android:name=".Qualification_Verification"></activity>
     </application>
 
 </manifest>

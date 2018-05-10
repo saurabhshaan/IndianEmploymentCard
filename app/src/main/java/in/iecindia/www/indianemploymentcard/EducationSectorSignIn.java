@@ -2,6 +2,7 @@ package in.iecindia.www.indianemploymentcard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -30,6 +31,8 @@ public class EducationSectorSignIn extends AppCompatActivity {
 
     private EditText email, password;
     private String Eemail,Epassword;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +59,18 @@ public class EducationSectorSignIn extends AppCompatActivity {
         Epassword = password.getText().toString().trim();
 
         if (isOnline()) {
+            SharedMethod();
             new EducationSectorSignIn.EducationLoginFetch().execute(Eemail, Epassword);
         }else{
             Toast.makeText(this, "You are offline", Toast.LENGTH_SHORT).show();
         }
+    }
+    public void SharedMethod(){
+        sharedPreferences = getApplicationContext().getSharedPreferences("Eemail",MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.putString("Email",Eemail);
+        editor.commit();
+        return;
     }
     class EducationLoginFetch extends AsyncTask<String,Void,String> {
         HttpURLConnection conn;
@@ -72,7 +83,7 @@ public class EducationSectorSignIn extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            String url1 = "http://172.28.172.2:8080/EducationalSectorSignIn.php";
+            String url1 = "http://172.28.172.2:8080/IndianEmploymentCard/EducationalSectorSignIn.php";
             String EmailorIEC = strings[0];
             String IEC_Passwprd = strings[1];
             try{
@@ -124,7 +135,7 @@ public class EducationSectorSignIn extends AppCompatActivity {
             Toast.makeText(EducationSectorSignIn.this, "res"+result, Toast.LENGTH_SHORT).show();
 
             if (result.equals("success")){
-                startActivity(new Intent(EducationSectorSignIn.this,Tab_Activity.class));
+                startActivity(new Intent(EducationSectorSignIn.this,Qualification_Verification.class));
             }
             else {
                 Toast.makeText(EducationSectorSignIn.this, "Email or Password is Incorrect", Toast.LENGTH_SHORT).show();

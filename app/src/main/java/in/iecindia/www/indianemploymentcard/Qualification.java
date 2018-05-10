@@ -1,18 +1,30 @@
 package in.iecindia.www.indianemploymentcard;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.Toolbar;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class Qualification extends AppCompatActivity {
-    private EditText Hschool,Hrollnumber, Imediate,Irollnumber,Gcourse,Gstatus,Guniversity,Grollnumber;
-    private String hscholl,hrollnumber,imedite,irollnumber,gcourse,gstatus,guniversity,grollnumber;
+    private EditText Hschool,Hrollnumber, Imediate,Irollnumber,Gcourse,Gstatus,Guniversity,Grollnumber,
+    Experience,Exp_in_year,com_email;
+    private String hscholl,hrollnumber,imedite,irollnumber,gcourse,gstatus,guniversity,grollnumber,experience,fromdate,
+            company_email;
     private String firstName,lastName,middleName,Email,AdharNumber,Addline1,Addline2,Addline3,AddPincode,
             AddState,AddCountry;
     Intent intent;
+
+//    DatePickerDialog.OnDateSetListener from_date, to_date;
+    Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +39,11 @@ public class Qualification extends AppCompatActivity {
         Guniversity = findViewById(R.id.guniversity);
         Grollnumber = findViewById(R.id.grollnumber);
 
+        Experience = findViewById(R.id.experience);
+        com_email = findViewById(R.id.company_email);
+        Exp_in_year = findViewById(R.id.experience_in_year);
+
+
         firstName = getIntent().getStringExtra("FirstName");
         lastName = getIntent().getStringExtra("LastName");
         middleName = getIntent().getStringExtra("MiddleName");
@@ -40,6 +57,8 @@ public class Qualification extends AppCompatActivity {
         AddCountry = getIntent().getStringExtra("Country");
 
     }
+
+
     public void UploadPhoto(View view){
         //validation
         if (Hschool.getText().toString().length() ==0){
@@ -66,7 +85,16 @@ public class Qualification extends AppCompatActivity {
         }if (Grollnumber.getText().toString().length()==0){
             Grollnumber.setError("Fill RollNumber");
             return;
-        }else{
+        }if (Experience.getText().toString().length()==0){
+            Experience.setError("Fill company");
+            return;
+        }if (com_email.getText().toString().length()==0){
+            com_email.setError("Fill email");
+            return;
+        }if (Exp_in_year.getText().toString().length()==0){
+            Exp_in_year.setError("Fill date");
+            return;
+        } else{
             Toast.makeText(this, "Valid", Toast.LENGTH_SHORT).show();
         }
         // validation ends here
@@ -78,6 +106,10 @@ public class Qualification extends AppCompatActivity {
         gstatus = Gstatus.getText().toString().trim();
         guniversity = Guniversity.getText().toString().trim();
         grollnumber = Grollnumber.getText().toString().trim();
+        company_email = com_email.getText().toString().trim();
+        experience = Experience.getText().toString().trim();
+        fromdate = Exp_in_year.getText().toString().trim();
+
 
         Intent intent = new Intent(Qualification.this,UploadPicture.class);
         intent.putExtra("FirstName", firstName);
@@ -99,6 +131,9 @@ public class Qualification extends AppCompatActivity {
         intent.putExtra("Gstatus",gstatus);
         intent.putExtra("Guniversity",guniversity);
         intent.putExtra("Grollnumber",grollnumber);
+        intent.putExtra("Experience",experience);
+        intent.putExtra("Company_Email",company_email);
+        intent.putExtra("FromDate",fromdate);
         startActivity(intent);
     }
 }

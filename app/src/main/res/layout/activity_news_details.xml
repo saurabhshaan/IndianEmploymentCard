@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.iecindia.www.indianemploymentcard.NewsDetails">
+
+
+    <ImageView
+        android:id="@+id/newsimage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/newstitle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp"
+        android:textColor="#FF00FF"/>
+
+    <TextView
+        android:id="@+id/newssource"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="15dp"
+        android:textColor="#FF00FF"/>
+
+    <TextView
+        android:id="@+id/newsdescription"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="15dp"
+        android:textColor="#FF00FF"/>
+
+    <TextView
+        android:id="@+id/querytext"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="18dp"
+        android:textColor="#FF00FF" />
+
+</LinearLayout>

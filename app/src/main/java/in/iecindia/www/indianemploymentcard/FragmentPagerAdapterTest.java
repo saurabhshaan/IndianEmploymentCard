@@ -4,9 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-/**
- * Created by DHARMENDRA on 12-Oct-16.
- */
 public class FragmentPagerAdapterTest extends FragmentPagerAdapter {
     public FragmentPagerAdapterTest(FragmentManager fm) {
         super(fm);
@@ -17,11 +14,11 @@ public class FragmentPagerAdapterTest extends FragmentPagerAdapter {
         Fragment fragment=null;
         if (position==0)
         {
-            fragment=new Profile();
+            fragment=new News();
         }
         if (position==1)
         {
-            fragment=new News();
+            fragment=new Profile();
         }
         if (position==2)
         {

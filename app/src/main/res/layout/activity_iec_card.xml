@@ -2,14 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/android"
-    android:background="#aaa322">
+    android:id="@+id/android">
 
     <!-- TODO: Update blank fragment layout -->
-    <ImageView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/iec_card_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="android"
-        android:textColor="#9e0e0e" />
+        android:paddingTop="10dp"
+        android:layout_weight="1"
+        />
 
 </FrameLayout>

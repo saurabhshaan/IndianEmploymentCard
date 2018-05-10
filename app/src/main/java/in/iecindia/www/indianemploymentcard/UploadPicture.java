@@ -37,16 +37,16 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class UploadPicture extends AppCompatActivity {
+
     private ImageView imageView;
-    private Button button;
-    private String Hello;
     private EditText pass,cnfrmpass;
     private String password,Confrmpassword;
     String encodedImage, imgDecodableString;
     final int RESULT_LOAD_IMG = 1;
-    private String hscholl,hrollnumber,imedite,irollnumber,gcourse,gstatus,guniversity,grollnumber;
+    private String hscholl,hrollnumber,imedite,irollnumber,gcourse,gstatus,guniversity,grollnumber,experince,fromdate,Cemail;
     private String firstName,lastName,middleName,Email,AdharNumber,Addline1,Addline2,Addline3,AddPincode,
             AddState,AddCountry;
+    private String hs_verification_status,im_verification_status,gr_verification_status,e_v_status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,40 @@ public class UploadPicture extends AppCompatActivity {
         pass = findViewById(R.id.password);
         cnfrmpass = findViewById(R.id.cnfrmpassword);
         imageView = findViewById(R.id.imageView4);
+
+        hs_verification_status = "Unverified";
+        im_verification_status = "Unverified";
+        gr_verification_status = "Unverified";
+        e_v_status="Unverified";
+
+        firstName = getIntent().getStringExtra("FirstName");
+        lastName = getIntent().getStringExtra("LastName");
+        middleName = getIntent().getStringExtra("MiddleName");
+        Email = getIntent().getStringExtra("Email");
+        AdharNumber = getIntent().getStringExtra("AdhaarNumber");
+        Addline1 = getIntent().getStringExtra("Address1");
+        Addline2 = getIntent().getStringExtra("Address2");
+        Addline3 = getIntent().getStringExtra("Address3");
+        AddPincode = getIntent().getStringExtra("Pincode");
+        AddState = getIntent().getStringExtra("State");
+        AddCountry = getIntent().getStringExtra("Country");
+
+        hscholl= getIntent().getStringExtra("HighSchool");
+        hrollnumber = getIntent().getStringExtra("Hrollnumber");
+
+        imedite = getIntent().getStringExtra("Intermediate");
+        irollnumber = getIntent().getStringExtra("InterRollnumber");
+
+        gcourse = getIntent().getStringExtra("Gcourse");
+        gstatus = getIntent().getStringExtra("Gstatus");
+        guniversity = getIntent().getStringExtra("Guniversity");
+        grollnumber = getIntent().getStringExtra("Grollnumber");
+
+        experince = getIntent().getStringExtra("Experience");
+        Cemail = getIntent().getStringExtra("Company_Email");
+        fromdate = getIntent().getStringExtra("FromDate");
+
+
 
     }
     public void upload(View view){
@@ -177,37 +211,8 @@ public class UploadPicture extends AppCompatActivity {
             Toast.makeText(this, "Password OK", Toast.LENGTH_SHORT).show();
         }
 
-        firstName = getIntent().getStringExtra("FirstName");
-        lastName = getIntent().getStringExtra("LastName");
-        middleName = getIntent().getStringExtra("MiddleName");
-        Email = getIntent().getStringExtra("Email");
-        AdharNumber = getIntent().getStringExtra("AdhaarNumber");
-        Addline1 = getIntent().getStringExtra("Address1");
-        Addline2 = getIntent().getStringExtra("Address2");
-        Addline3 = getIntent().getStringExtra("Address3");
-        AddPincode = getIntent().getStringExtra("Pincode");
-        AddState = getIntent().getStringExtra("State");
-        AddCountry = getIntent().getStringExtra("Country");
-
-        hscholl= getIntent().getStringExtra("HighSchool");
-        hrollnumber = getIntent().getStringExtra("Hrollnumber");
-        imedite = getIntent().getStringExtra("Intermediate");
-        irollnumber = getIntent().getStringExtra("InterRollnumber");
-        gcourse = getIntent().getStringExtra("Gcourse");
-        gstatus = getIntent().getStringExtra("Gstatus");
-        guniversity = getIntent().getStringExtra("Guniversity");
-        grollnumber = getIntent().getStringExtra("Grollnumber");
-
-
         password = pass.getText().toString().trim();
         Confrmpassword = cnfrmpass.getText().toString().trim();
-
-        Hello = "Hii";
-
-        Log.d("ASD",firstName+""+lastName+""+middleName+""+Email+""+AdharNumber+""+Addline1+""+
-                Addline2+""+Addline3+""+AddPincode+""+AddState+""+AddCountry+""+hscholl+""+hrollnumber+""+
-                imedite+""+irollnumber+""+gcourse+""+gstatus+""+guniversity+""+grollnumber+""+password+""+Confrmpassword);
-
 
         Log.d("PIC",password+""+Confrmpassword+""+encodedImage);
         if (isOnline()){
@@ -215,8 +220,39 @@ public class UploadPicture extends AppCompatActivity {
 
             SignUpBackground signUpBackground = new SignUpBackground(UploadPicture.this);
             signUpBackground.execute(method,firstName,lastName,middleName,Email,AdharNumber,Addline1,Addline2,Addline3,
-                    AddPincode,AddState,AddCountry,hscholl,hrollnumber,imedite,irollnumber,gcourse,gstatus,guniversity,
-                    grollnumber,encodedImage,password,Confrmpassword);
+                    AddPincode,AddState,AddCountry,hscholl,hrollnumber,hs_verification_status,imedite,irollnumber,im_verification_status,
+                    gcourse,gstatus,guniversity,
+                    grollnumber,gr_verification_status,experince,Cemail,fromdate,e_v_status,encodedImage,password,Confrmpassword);
+
+            Log.d("TAG",firstName);
+            Log.d("TAG",lastName);
+            Log.d("TAG",middleName);
+            Log.d("TAG",Email);
+            Log.d("TAG",AdharNumber);
+            Log.d("TAG",Addline1);
+            Log.d("TAG",Addline2);
+            Log.d("TAG",Addline3);
+            Log.d("TAG",AddPincode);
+            Log.d("TAG",AddState);
+            Log.d("TAG",AddCountry);
+            Log.d("TAG",hscholl);
+            Log.d("TAG",hrollnumber);
+            Log.d("TAG",hs_verification_status);
+            Log.d("TAG",imedite);
+            Log.d("TAG",irollnumber);
+            Log.d("TAG",im_verification_status);
+            Log.d("TAG",gcourse);
+            Log.d("TAG",gstatus);
+            Log.d("TAG",guniversity);
+            Log.d("TAG",grollnumber);
+            Log.d("TAG",gr_verification_status);
+            Log.d("TAG",experince);
+            Log.d("TAG",Cemail);
+            Log.d("TAG",fromdate);
+            Log.d("TAG",e_v_status);
+            Log.d("TAG",encodedImage);
+            Log.d("TAG",password);
+            Log.d("TAG",Confrmpassword);
 
         }else {
             Toast.makeText(this, "Connection is Offline ", Toast.LENGTH_SHORT).show();
@@ -241,7 +277,7 @@ public class UploadPicture extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            String reg_url = "http://172.28.172.2:8080/IndividualSignUp.php";
+            String reg_url = "http://172.28.172.2:8080/IndianEmploymentCard/IndividualSignUp.php";
             Log.d("TAG", "attempt to register");
 
             String method = params[0];
@@ -257,22 +293,36 @@ public class UploadPicture extends AppCompatActivity {
                 String AddPincode = params[9];
                 String AddState = params[10];
                 String AddCountry = params[11];
+
                 String hscholl = params[12];
                 String hrollnumber = params[13];
-                String imedite = params[14];
-                String irollnumber = params[15];
-                String gcourse = params[16];
-                String gstatus = params[17];
-                String guniversity = params[18];
-                String grollnumber = params[19];
-                String encodedImage = params[20];
-                String password112 = params[21];
-                String cnfrmpassword2 = params[22];
+                String hs_verification = params[14];
 
-                Log.d("SIT", firstname + "" + lastname+""+middleName+""+Email+""+AdharNumber+""+Addline1+""+Addline2+""
+                String imedite = params[15];
+                String irollnumber = params[16];
+                String im_verification = params[17];
+
+                String gcourse = params[18];
+                String gstatus = params[19];
+                String guniversity = params[20];
+                String grollnumber = params[21];
+                String gr_verification = params[22];
+
+                String Experience = params[23];
+                String Semail = params[24];
+                String From_Date = params[25];
+                String E_V_Status = params[26];
+
+                String encodedImage = params[27];
+                String password112 = params[28];
+                String cnfrmpassword2 = params[29];
+
+                Log.d("TAG", "params"+firstname + "" + lastname+""+middleName+""+Email+""+AdharNumber+""+Addline1+""+Addline2+""
                         +Addline3+""+AddPincode+""+AddState+""+AddCountry+""+hscholl+""+hrollnumber+""+imedite+""+irollnumber+""
-                        +gcourse+""+gstatus+""+guniversity+""+grollnumber+""+encodedImage+""+password112+""+cnfrmpassword2);
+                        +gcourse+""+gstatus+""+guniversity+""+grollnumber+""+Experience+""+Semail+""+From_Date+
+                        ""+gr_verification+""+hs_verification+""+im_verification+""+E_V_Status+""+encodedImage+""+password112+""+cnfrmpassword2);
 //                Log.d("TAG",password112);
+                Log.d("TAG",Semail);
                 try {
                     URL url = new URL(reg_url);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -296,19 +346,31 @@ public class UploadPicture extends AppCompatActivity {
                             URLEncoder.encode("Pincode", "UTF-8") + "=" + URLEncoder.encode(AddPincode, "UTF-8") + "&" +
                             URLEncoder.encode("State", "UTF-8") + "=" + URLEncoder.encode(AddState, "UTF-8") + "&" +
                             URLEncoder.encode("Country", "UTF-8") + "=" + URLEncoder.encode(AddCountry, "UTF-8") + "&" +
+
                             URLEncoder.encode("Highschool_Board", "UTF-8") + "=" + URLEncoder.encode(hscholl, "UTF-8") + "&" +
                             URLEncoder.encode("Highschool_Roll_Number", "UTF-8") + "=" + URLEncoder.encode(hrollnumber, "UTF-8") + "&" +
+                            URLEncoder.encode("HS_Veirfication_Status","UTF-8")+ "=" +URLEncoder.encode(hs_verification,"UTF-8")+"&"+
+
                             URLEncoder.encode("Intermediate_Board", "UTF-8") + "=" + URLEncoder.encode(imedite, "UTF-8") + "&" +
                             URLEncoder.encode("Intermediate_Roll_Number", "UTF-8") + "=" + URLEncoder.encode(irollnumber, "UTF-8") + "&" +
+                            URLEncoder.encode("IM_Verification_Status","UTF-8")+"="+URLEncoder.encode(im_verification,"UTF-8")+"&"+
+
                             URLEncoder.encode("Graduation_Course", "UTF-8") + "=" + URLEncoder.encode(gcourse, "UTF-8") + "&" +
                             URLEncoder.encode("Graduation_Status", "UTF-8") + "=" + URLEncoder.encode(gstatus, "UTF-8") + "&" +
                             URLEncoder.encode("Graduation_University", "UTF-8") + "=" + URLEncoder.encode(guniversity, "UTF-8")+ "&" +
                             URLEncoder.encode("Graduation_Roll_Number", "UTF-8") + "=" + URLEncoder.encode(grollnumber, "UTF-8")+ "&" +
+                            URLEncoder.encode("GR_Verification_Status","UTF-8")+"="+URLEncoder.encode(gr_verification,"UTF-8")+"&"+
+
+                            URLEncoder.encode("Experience","UTF-8")+ "="+ URLEncoder.encode(Experience,"UTF-8")+ "&"+
+                            URLEncoder.encode("Semail","UTF-8")+"="+URLEncoder.encode(Semail,"UTF-8")+"&"+
+                            URLEncoder.encode("FromDate","UTF-8")+"="+URLEncoder.encode(From_Date,"UTF-8")+"&"+
+                            URLEncoder.encode("E_V_Status","UTF-8")+"="+URLEncoder.encode(E_V_Status,"UTF-8")+"&"+
+
                             URLEncoder.encode("Person_Image", "UTF-8") + "=" + URLEncoder.encode(encodedImage, "UTF-8")+"&"+
                             URLEncoder.encode("Password","UTF-8")+"="+URLEncoder.encode(password112,"UTF-8")+"&"+
-                           // URLEncoder.encode("Password","UTF-8")+"="+URLEncoder.encode(password112,"UTF-8")+"&"+
                             URLEncoder.encode("Confrm_pass","UTF-8")+"="+URLEncoder.encode(cnfrmpassword2,"UTF-8");
-                    Log.d("TAG",URLEncoder.encode("Password","UTF-8")+"="+URLEncoder.encode(password112,"UTF-8"));
+
+                    Log.d("TAG",URLEncoder.encode("Semail","UTF-8")+"="+URLEncoder.encode(Semail,"UTF-8"));
                     Log.d("TAG",URLEncoder.encode("Confrm_pass","UTF-8")+"="+URLEncoder.encode(cnfrmpassword2,"UTF-8"));
                     Log.d("TAG", "data parameter set");
                     bufferedWriter.write(OpenConn);
@@ -339,7 +401,8 @@ public class UploadPicture extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Toast.makeText(ctx, "Registered", Toast.LENGTH_SHORT).show();
+
+            startActivity(new Intent(UploadPicture.this,LogOn.class));
         }
     }
 }

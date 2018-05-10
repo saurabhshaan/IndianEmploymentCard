@@ -60,7 +60,7 @@
         android:textAllCaps="false"
         android:textColor="@color/colorAccent"
         android:textColorLink="@color/colorAccent"
-        android:textSize="10sp"
+        android:textSize="15sp"
         android:onClick="COR_LOGIN"/>
 
     <TextView
@@ -73,6 +73,6 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/colorAccent"
-        android:textSize="10sp"
+        android:textSize="15sp"
         android:onClick="UNI_LOGIN"/>
 </RelativeLayout>

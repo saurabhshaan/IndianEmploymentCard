@@ -2,11 +2,13 @@ package in.iecindia.www.indianemploymentcard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -28,6 +30,8 @@ import java.net.URLEncoder;
 public class CorporateSignIn extends AppCompatActivity {
     private EditText email, password;
     private String Cemail,Cpassword;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +58,19 @@ public class CorporateSignIn extends AppCompatActivity {
         Cpassword = password.getText().toString().trim();
 
         if (isOnline()) {
+            SharedMethod();
             new CorporateSignIn.LoginFetch().execute(Cemail, Cpassword);
         }else{
             Toast.makeText(this, "You are offline", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void SharedMethod(){
+        sharedPreferences = getApplicationContext().getSharedPreferences("Cemail",MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.putString("Email",Cemail);
+        editor.commit();
+        return;
     }
 
     class LoginFetch extends AsyncTask<String,Void,String> {
@@ -71,7 +84,7 @@ public class CorporateSignIn extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            String url1 = "http://172.28.172.2:8080CorporateSignIn.php";
+            String url1 = "http://172.28.172.2:8080/IndianEmploymentCard/CorporateSignIn.php";
             String EmailorIEC = strings[0];
             String IEC_Passwprd = strings[1];
             try{
@@ -115,7 +128,7 @@ public class CorporateSignIn extends AppCompatActivity {
             } catch (IOException e){
                 e.printStackTrace();
             }
-            return "Login Success...Welcome";
+            return "success";
         }
 
         @Override
@@ -123,7 +136,7 @@ public class CorporateSignIn extends AppCompatActivity {
             Toast.makeText(CorporateSignIn.this, "res"+result, Toast.LENGTH_SHORT).show();
 
             if (result.equals("success")){
-                startActivity(new Intent(CorporateSignIn.this,Tab_Activity.class));
+                startActivity(new Intent(CorporateSignIn.this,CorporateVerificationActivity.class));
             }
             else {
                 Toast.makeText(CorporateSignIn.this, "Email or Password is Incorrect", Toast.LENGTH_SHORT).show();
@@ -131,11 +144,9 @@ public class CorporateSignIn extends AppCompatActivity {
             }
         }
     }
-
     public boolean isOnline(){
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
         return info != null && info.isConnectedOrConnecting();
     }
-
 }

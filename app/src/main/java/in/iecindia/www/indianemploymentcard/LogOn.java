@@ -2,17 +2,23 @@ package in.iecindia.www.indianemploymentcard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -27,12 +33,16 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LogOn extends AppCompatActivity{
     private LogOnPrefManager logOnPrefManager;
     private EditText emailoriec,mpassword;
     private String emailice, pass;
     private Button signinbtn;
+    SharedPreferences.Editor editor;
+    String mFristName,mLastName,mMiddleName,mEmail,mAdhaarNumber,mQualification_Status,mExperience_Status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +135,7 @@ public class LogOn extends AppCompatActivity{
 
         @Override
         protected String doInBackground(String... strings) {
-            String url1 = "http://172.28.172.2:8080/iec_login.php";
+            String url1 = "http://172.28.172.2:8080/IndianEmploymentCard/iec_login.php";
             String EmailorIEC = strings[0];
             String IEC_Passwprd = strings[1];
             try{
@@ -176,13 +186,10 @@ public class LogOn extends AppCompatActivity{
         protected void onPostExecute(String result) {
             Toast.makeText(LogOn.this, "res"+result, Toast.LENGTH_SHORT).show();
 
-            if (result.equals("success")){
-                startActivity(new Intent(LogOn.this,Tab_Activity.class));
-            }
-            else {
-                    Toast.makeText(LogOn.this, "Email or Password is Incorrect", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                Intent intent = new Intent(LogOn.this,Tab_Activity.class);
+                intent.putExtra(emailice,"Email");
+                startActivity(intent);
+//                startActivity(new Intent(LogOn.this,Tab_Activity.class));
         }
     }
 }

@@ -167,6 +167,7 @@
             android:hint="@string/university"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/rollnum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -181,16 +182,70 @@
             android:hint="@string/rollnumber"/>
     </android.support.design.widget.TextInputLayout>
 
+    <TextView
+        android:id="@+id/expe"
+        android:layout_below="@+id/uni"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="6dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/experience"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textColor="#000"/>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/Exp_company"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/expe">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/experience"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:hint="@string/company_name"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/oooo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/Exp_company">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/company_email"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:hint="@string/company_email"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/experience_year"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/oooo">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/experience_in_year"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:inputType="text"
+            android:hint="@string/experience_if_any"/>
+    </android.support.design.widget.TextInputLayout>
+
+
     <Button
         android:id="@+id/uploadphotograph"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/uni"
+        android:layout_below="@+id/experience_year"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="25dp"
         android:text="@string/uploadpic"
         android:textAllCaps="false"
         android:background="@color/colorAccent"
         android:onClick="UploadPhoto"/>
 </RelativeLayout>
+
+
 </ScrollView>

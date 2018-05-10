@@ -1,6 +1,7 @@
 package in.iecindia.www.indianemploymentcard;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -22,8 +23,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class CorporateSignUp extends AppCompatActivity {
-    private EditText Cname, Cemail,Caddress,Pannumber,nbrbrnch,TinNumber,ceoname;
-    private String cname, cemail,caddress,pannumber,NBRbrnch,tinNumber,ceoName;
+    private EditText Cname, Cemail,Caddress,Pannumber,nbrbrnch,TinNumber,ceoname,password,conform_password;
+    private String cname, cemail,caddress,pannumber,NBRbrnch,tinNumber,ceoName,mpassword,mConform_pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,8 @@ public class CorporateSignUp extends AppCompatActivity {
         nbrbrnch = findViewById(R.id.noofbrnch);
         TinNumber = findViewById(R.id.tinnumber);
         ceoname = findViewById(R.id.ceoname);
+        password = findViewById(R.id.mpass);
+        conform_password = findViewById(R.id.cnfpass);
 
     }
     public void CorporateSignUp(View view){
@@ -61,6 +64,14 @@ public class CorporateSignUp extends AppCompatActivity {
         }if (ceoname.getText().toString().length()==0){
             ceoname.setError("Please fill");
             return;
+        }if (password.getText().toString().length()==0){
+            password.setError("Please fill");
+            return;
+        }if (conform_password.getText().toString().length()==0){
+            conform_password.setError("Please fill");
+            return;
+        }else {
+            Toast.makeText(this, "Thanks You", Toast.LENGTH_SHORT).show();
         }
         cname = Cname.getText().toString().trim();
         cemail = Cemail.getText().toString().trim();
@@ -69,11 +80,13 @@ public class CorporateSignUp extends AppCompatActivity {
         NBRbrnch = nbrbrnch.getText().toString().trim();
         tinNumber = TinNumber.getText().toString().trim();
         ceoName = ceoname.getText().toString().trim();
+        mpassword = password.getText().toString().trim();
+        mConform_pass = conform_password.getText().toString().trim();
 
         if (isOnline()){
             String method = "CorporateRegister";
             CorporateBackgrndTask corporateBackgrndTask = new CorporateBackgrndTask(CorporateSignUp.this);
-            corporateBackgrndTask.execute(method,cname,cemail,caddress,pannumber,NBRbrnch,tinNumber,ceoName);
+            corporateBackgrndTask.execute(method,cname,cemail,caddress,pannumber,NBRbrnch,tinNumber,ceoName,mpassword,mConform_pass);
         }
 
     }
@@ -97,7 +110,7 @@ public class CorporateSignUp extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            String reg_url = "http://172.28.172.2:8080/CorporateSectorPeople.php";
+            String reg_url = "http://172.28.172.2:8080/IndianEmploymentCard/CorporateSectorPeople.php";
             Log.d("TAG", "attempt to register");
 
             String method = params[0];
@@ -109,9 +122,11 @@ public class CorporateSignUp extends AppCompatActivity {
                 String NumBrnch = params[5];
                 String TinNum = params[6];
                 String Ceoname = params[7];
+                String Password = params[8];
+                String Cnfrm_Password = params[9];
 
 
-                Log.d("SIT", CName + "" + Cemail+""+CAddress+""+panNuber+""+NumBrnch+""+TinNum+""+Ceoname);
+                Log.d("SIT", CName + "" + Cemail+""+CAddress+""+panNuber+""+NumBrnch+""+TinNum+""+Ceoname+""+Password+""+Cnfrm_Password);
                 try {
                     URL url = new URL(reg_url);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -130,7 +145,9 @@ public class CorporateSignUp extends AppCompatActivity {
                             URLEncoder.encode("panNuber", "UTF-8") + "=" + URLEncoder.encode(panNuber, "UTF-8") + "&" +
                             URLEncoder.encode("NumBrnch", "UTF-8") + "=" + URLEncoder.encode(NumBrnch, "UTF-8") + "&" +
                             URLEncoder.encode("TinNum", "UTF-8") + "=" + URLEncoder.encode(TinNum, "UTF-8") + "&" +
-                            URLEncoder.encode("Ceoname", "UTF-8") + "=" + URLEncoder.encode(Ceoname, "UTF-8");
+                            URLEncoder.encode("Ceoname", "UTF-8") + "=" + URLEncoder.encode(Ceoname, "UTF-8") + "&" +
+                            URLEncoder.encode("Password","UTF-8") + "="+URLEncoder.encode(Password,"UTF-8") + "&" +
+                            URLEncoder.encode("Conform_Password","UTF-8") + "="+URLEncoder.encode(Cnfrm_Password,"UTF-8");
                     Log.d("QWE", "data parameter set");
                     bufferedWriter.write(OpenConn);
                     bufferedWriter.flush();

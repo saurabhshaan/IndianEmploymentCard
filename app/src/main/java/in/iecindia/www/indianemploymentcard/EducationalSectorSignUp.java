@@ -119,7 +119,7 @@ public class EducationalSectorSignUp extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            String reg_url = "http://172.28.172.2:8080/EducationalSectorPeople.php";
+            String reg_url = "http://172.28.172.2:8080/IndianEmploymentCard/EducationalSectorPeople.php";
             Log.d("TAG", "attempt to register");
 
             String method = params[0];

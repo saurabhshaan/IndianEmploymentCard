@@ -6,8 +6,6 @@
     <string name="next">Next</string>
     <string name="skip">Skip</string>
     <string name="start">GOT IT</string>
-    <string name="open">Open</string>
-    <string name="close">Close</string>
     <string name="welcome">Welcome</string>
     <string name="iec">Email or IEC number</string>
     <string name="password">Password</string>
@@ -17,9 +15,6 @@
     <string name="last_name">Last Name</string>
     <string name="middle_name">Middle Name</string>
     <string name="email">Email</string>
-    <string name="contact1">Contact 1</string>
-    <string name="contact2">Contact 2</string>
-    <string name="contact3">Contact 3</string>
     <string name="adhaarno">Aadhar Number</string>
     <string name="personal">Personal Details</string>
     <string name="address">Address</string>
@@ -65,4 +60,7 @@
     <string name="university_login">Educational Sector Login</string>
     <string name="corporate_login">Corporate Sector Login</string>
     <string name="login">Login</string>
+    <string name="add_more_details">Add more details</string>
+    <string name="experience">Experience</string>
+    <string name="experience_if_any">Experience(if any)</string>
 </resources>
